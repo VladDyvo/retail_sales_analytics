@@ -1,0 +1,22 @@
+# Dataset e file pesanti
+data/
+output/dati_puliti/
+
+# Ambiente Virtuale Python
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# Configurazione di PyCharm / IDE
+.idea/
+.vscode/
+
+# Jupyter Notebook (File temporanei e checkpoint)
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# File di sistema (Windows / Mac)
+Thumbs.db
+.DS_Store
