@@ -21,6 +21,25 @@ Nel notebook `01_data_cleaning.ipynb` è stata eseguita la prima sfoltitura del 
 * **Dataset Vendite:** Il dataset principale `df_sales` contiene **1.013.932 righe** di vendite effettive.
 * **Clienti Anonimi:** Il **23.12% delle vendite (234.437 righe)** proviene da acquisti senza CustomerID, flaggati con la colonna `is_anonymous` per essere esclusi dall'analisi RFM ma mantenuti nei KPI aggregati.
 
+
+---
+
+
+### 🚀 Fase 1: Task 3 - Outlier Elimination e Feature Engineering (Completato ✅)
+
+* **Impatto della Pulizia degli Outlier:**
+  * **Righe iniziali (`df_sales`):** 1.013.932
+  * **Righe finali (`df_cleaned`):** 876.436
+  * **Righe eliminate:** 137.496 transazioni anomale rimosse mediante il metodo IQR.
+
+* **Rimozione degli Outlier (Metodo IQR):** Le anomalie sono state rimosse dalle colonne `Quantity` e `Price` utilizzando i limiti dell'Intervallo Interquartile (1.5 × IQR):
+  * **Quantity:** mantenuti i valori nel range **[1, 28]**
+  * **Price:** mantenuti i valori nel range **[0.001, 8.45]**
+
+* **Feature Engineering (`TotalPrice`):** Creata la nuova variabile `TotalPrice`, calcolata come `Quantity × Price`, per rappresentare il valore economico di ogni transazione. Dopo la pulizia, il valore massimo registrato è pari a **223.83**.
+
+* **Dataset Finale:** Il dataset pulito è stato esportato correttamente nel file `output/dati_puliti/cleaned_retail.csv`, pronto per le successive analisi esplorative (EDA).
+
 ## 📁 Struttura del Progetto
 
 ```text
