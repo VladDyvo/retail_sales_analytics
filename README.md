@@ -15,7 +15,11 @@ Nel notebook `01_data_cleaning.ipynb` è stata eseguita la prima sfoltitura del 
 ---
  
 
----
+---### 🔄 Fase 1: Task 2 - Isolamento Resi e Flag Clienti Anonimi (Completato ✅)
+
+* **Isolamento Resi:** Identificate **19.104 transazioni stornate** (Invoice con prefisso "C"), pari all'1.85% del totale, separate in un dataset `df_returns` dedicato.
+* **Dataset Vendite:** Il dataset principale `df_sales` contiene **1.013.932 righe** di vendite effettive.
+* **Clienti Anonimi:** Il **23.12% delle vendite (234.437 righe)** proviene da acquisti senza CustomerID, flaggati con la colonna `is_anonymous` per essere esclusi dall'analisi RFM ma mantenuti nei KPI aggregati.
 
 ## 📁 Struttura del Progetto
 
