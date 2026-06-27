@@ -48,7 +48,7 @@ L'analisi geografica è stata condotta applicando un approccio a due livelli (Su
   * La **Francia** solida al quarto posto con **206.820 €**, completando il trio dei mercati chiave europei.
   * A partire dalla **Svizzera** (53.805 €) in poi, si nota un netto gradino e un forte decremento del fatturato generato dagli altri paesi europei ed extra-europei.
 
-#### 🛠️ Nota Tecnica di Data Science:
+#### 🛠️ Nota Tecnica:
 La visualizzazione affiancata dimostra l'importanza del preprocessing visivo. Se avessimo incluso il Regno Unito nello stesso grafico degli altri paesi, le barre di mercati importanti come EIRE, Germania e Francia sarebbero risultate microscopicamente insignificanti, impedendo l'estrazione di questi fondamentali insight strategici.
 
 ## 📁 Struttura del Progetto
