@@ -36,7 +36,20 @@ Nel notebook `01_data_cleaning.ipynb` è stata eseguita la prima sfoltitura del 
 * **Feature Engineering (`TotalPrice`):** Creata la nuova variabile `TotalPrice`, calcolata come `Quantity × Price`, per rappresentare il valore economico di ogni transazione. Dopo la pulizia, il valore massimo registrato è pari a **223.83**.
 * **Dataset Finale:** Il dataset pulito è stato esportato correttamente nel file `output/dati_puliti/cleaned_retail.csv`, pronto per le successive analisi esplorative (EDA).
 
+### 📊 Fase2 Analisi della Distribuzione Geografica del Fatturato
 
+L'analisi geografica è stata condotta applicando un approccio a due livelli (Subplots) per gestire l'estrema asimmetria distributiva del dataset ed evitare l'effetto schiacciamento della scala visiva.
+
+#### 🌍 Considerazioni di Business:
+* **Dominanza del Mercato Interno (United Kingdom):** Come evidenziato nel grafico di sinistra (*Proporzione Globale*), il Regno Unito rappresenta il cuore pulsante del business, generando da solo oltre **9,16 milioni €** di fatturato. Questa cifra supera di gran lunga la somma di tutti gli altri mercati internazionali messi insieme.
+* **I Top Player Esteri (No-UK):** L'isolamento strategico dell'UK nel grafico di destra (*Top 10 Mercati Esteri*) permette di analizzare accuratamente le performance internazionali:
+  * L'**EIRE (Irlanda)** si conferma ufficialmente come il **secondo mercato aziendale più importante** in assoluto, con un fatturato di **275.030 €**.
+  * La **Germania** segue a brevissima distanza in terza posizione con **266.907 €**, evidenziando un testa a testa commerciale molto competitivo con l'Irlanda.
+  * La **Francia** solida al quarto posto con **206.820 €**, completando il trio dei mercati chiave europei.
+  * A partire dalla **Svizzera** (53.805 €) in poi, si nota un netto gradino e un forte decremento del fatturato generato dagli altri paesi europei ed extra-europei.
+
+#### 🛠️ Nota Tecnica di Data Science:
+La visualizzazione affiancata dimostra l'importanza del preprocessing visivo. Se avessimo incluso il Regno Unito nello stesso grafico degli altri paesi, le barre di mercati importanti come EIRE, Germania e Francia sarebbero risultate microscopicamente insignificanti, impedendo l'estrazione di questi fondamentali insight strategici.
 
 ## 📁 Struttura del Progetto
 
