@@ -23,22 +23,20 @@ Nel notebook `01_data_cleaning.ipynb` è stata eseguita la prima sfoltitura del 
 
 
 ---
-
-
 ### 🚀 Fase 1: Task 3 - Outlier Elimination e Feature Engineering (Completato ✅)
 
-* **Impatto della Pulizia degli Outlier:**
+* **Analisi dell'Impatto per Variabile:** Per validare la scelta del metodo IQR, è stato verificato singolarmente l'impatto di ciascuna soglia: il filtro su `Price` (>8.45) esclude il 7.79% delle transazioni, mentre quello su `Quantity` (>28.5) esclude il 5.29%. La sovrapposizione tra i due filtri spiega la quasi totalità del 13.6% di righe eliminate complessivamente, confermando l'assenza di una singola soglia eccessivamente aggressiva.
+* **Impatto Globale della Pulizia:**
   * **Righe iniziali (`df_sales`):** 1.013.932
   * **Righe finali (`df_cleaned`):** 876.436
-  * **Righe eliminate:** 137.496 transazioni anomale rimosse mediante il metodo IQR.
-
+  * **Righe eliminate:** 137.496 transazioni anomale complessive rimosse mediante l'applicazione congiunta dei filtri IQR.
 * **Rimozione degli Outlier (Metodo IQR):** Le anomalie sono state rimosse dalle colonne `Quantity` e `Price` utilizzando i limiti dell'Intervallo Interquartile (1.5 × IQR):
-  * **Quantity:** mantenuti i valori nel range **[1, 28]**
+  * **Quantity:** mantenuti i valori nel range **[1, 28.5]**
   * **Price:** mantenuti i valori nel range **[0.001, 8.45]**
-
 * **Feature Engineering (`TotalPrice`):** Creata la nuova variabile `TotalPrice`, calcolata come `Quantity × Price`, per rappresentare il valore economico di ogni transazione. Dopo la pulizia, il valore massimo registrato è pari a **223.83**.
-
 * **Dataset Finale:** Il dataset pulito è stato esportato correttamente nel file `output/dati_puliti/cleaned_retail.csv`, pronto per le successive analisi esplorative (EDA).
+
+
 
 ## 📁 Struttura del Progetto
 
