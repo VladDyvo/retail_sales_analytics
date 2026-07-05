@@ -36,7 +36,8 @@ Nel notebook `01_data_cleaning.ipynb` è stata eseguita la prima sfoltitura del 
 * **Feature Engineering (`TotalPrice`):** Creata la nuova variabile `TotalPrice`, calcolata come `Quantity × Price`, per rappresentare il valore economico di ogni transazione. Dopo la pulizia, il valore massimo registrato è pari a **223.83**.
 * **Dataset Finale:** Il dataset pulito è stato esportato correttamente nel file `output/dati_puliti/cleaned_retail.csv`, pronto per le successive analisi esplorative (EDA).
 
-### 📊 Fase2 Analisi della Distribuzione Geografica del Fatturato
+---
+### 📊 Fase 2: Task 1 - Analisi della Distribuzione Geografica del Fatturato
 
 L'analisi geografica è stata condotta applicando un approccio a due livelli (Subplots) per gestire l'estrema asimmetria distributiva del dataset ed evitare l'effetto schiacciamento della scala visiva.
 
@@ -48,9 +49,33 @@ L'analisi geografica è stata condotta applicando un approccio a due livelli (Su
   * La **Francia** solida al quarto posto con **206.820 €**, completando il trio dei mercati chiave europei.
   * A partire dalla **Svizzera** (53.805 €) in poi, si nota un netto gradino e un forte decremento del fatturato generato dagli altri paesi europei ed extra-europei.
 
-#### 🛠️ Nota Tecnica di Data Science:
+#### 🛠️ Nota Tecnica:
 La visualizzazione affiancata dimostra l'importanza del preprocessing visivo. Se avessimo incluso il Regno Unito nello stesso grafico degli altri paesi, le barre di mercati importanti come EIRE, Germania e Francia sarebbero risultate microscopicamente insignificanti, impedendo l'estrazione di questi fondamentali insight strategici.
 
+---
+### 📈 2. Trend Mensile delle Vendite
+
+L'analisi temporale è stata eseguita aggregando il fatturato su base mensile per osservare l'evoluzione delle vendite nel tempo. Per evidenziare il trend generale e attenuare le oscillazioni di breve periodo è stata calcolata una media mobile a 3 mesi.
+
+#### 🔍 Considerazioni di Business
+
+- Il fatturato mostra una chiara componente stagionale durante il periodo analizzato.
+- I valori massimi vengono raggiunti nei mesi di **novembre 2010** e **novembre 2011**, suggerendo un significativo incremento della domanda nel periodo che precede le festività natalizie.
+- Dopo ciascun picco si osserva una marcata contrazione delle vendite, indicando un comportamento ciclico tipico delle attività retail.
+- Al di fuori dei picchi stagionali, il fatturato rimane relativamente stabile, oscillando tra circa **300.000 €** e **400.000 €** mensili.
+- La media mobile a 3 mesi evidenzia una crescita progressiva del fatturato nel secondo semestre di ciascun anno, culminando nei picchi registrati a novembre.
+
+> **Nota:** Il valore registrato a dicembre 2011 risulta sensibilmente inferiore rispetto agli altri mesi poiché il dataset termina il **9 dicembre 2011**, rappresentando quindi un mese incompleto e non direttamente confrontabile con gli altri periodi.
+
+#### 🛠️ Nota Tecnica:
+
+La colonna `InvoiceDate` è stata convertita nel formato `datetime` per consentire l'aggregazione temporale mediante `pd.Grouper(freq='ME')`, che raggruppa automaticamente le transazioni su base mensile. Successivamente è stata calcolata una media mobile a 3 mesi (`rolling(window=3).mean()`), utilizzata per smussare le fluttuazioni mensili ed evidenziare il trend di lungo periodo.
+
+#### 📌 Insight Principale
+
+L'azienda presenta una forte stagionalità delle vendite, con una crescita significativa del fatturato nel periodo che precede le festività natalizie. Questo comportamento suggerisce che campagne promozionali, gestione delle scorte e pianificazione delle risorse dovrebbero essere concentrate soprattutto nell'ultimo trimestre dell'anno, periodo in cui si registra il maggiore volume di ricavi.
+
+---
 ## 📁 Struttura del Progetto
 
 ```text
