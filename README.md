@@ -42,18 +42,18 @@ Nel notebook `01_data_cleaning.ipynb` è stata eseguita la prima sfoltitura del 
 L'analisi geografica è stata condotta applicando un approccio a due livelli (Subplots) per gestire l'estrema asimmetria distributiva del dataset ed evitare l'effetto schiacciamento della scala visiva.
 
 #### 🌍 Considerazioni di Business:
-* **Dominanza del Mercato Interno (United Kingdom):** Come evidenziato nel grafico di sinistra (*Proporzione Globale*), il Regno Unito rappresenta il cuore pulsante del business, generando da solo oltre **9,16 milioni €** di fatturato. Questa cifra supera di gran lunga la somma di tutti gli altri mercati internazionali messi insieme.
+* **Dominanza del Mercato Interno (United Kingdom):** Come evidenziato nel grafico di sinistra (*Proporzione Globale*), il Regno Unito rappresenta il cuore pulsante del business, generando da solo oltre **9,16 milioni £** di fatturato. Questa cifra supera di gran lunga la somma di tutti gli altri mercati internazionali messi insieme.
 * **I Top Player Esteri (No-UK):** L'isolamento strategico dell'UK nel grafico di destra (*Top 10 Mercati Esteri*) permette di analizzare accuratamente le performance internazionali:
-  * L'**EIRE (Irlanda)** si conferma ufficialmente come il **secondo mercato aziendale più importante** in assoluto, con un fatturato di **275.030 €**.
-  * La **Germania** segue a brevissima distanza in terza posizione con **266.907 €**, evidenziando un testa a testa commerciale molto competitivo con l'Irlanda.
-  * La **Francia** solida al quarto posto con **206.820 €**, completando il trio dei mercati chiave europei.
-  * A partire dalla **Svizzera** (53.805 €) in poi, si nota un netto gradino e un forte decremento del fatturato generato dagli altri paesi europei ed extra-europei.
+  * L'**EIRE (Irlanda)** si conferma ufficialmente come il **secondo mercato aziendale più importante** in assoluto, con un fatturato di **275.030 £**.
+  * La **Germania** segue a brevissima distanza in terza posizione con **266.907 £**, evidenziando un testa a testa commerciale molto competitivo con l'Irlanda.
+  * La **Francia** solida al quarto posto con **206.820 £**, completando il trio dei mercati chiave europei.
+  * A partire dalla **Svizzera** (53.805 £) in poi, si nota un netto gradino e un forte decremento del fatturato generato dagli altri paesi europei ed extra-europei.
 
 #### 🛠️ Nota Tecnica:
 La visualizzazione affiancata dimostra l'importanza del preprocessing visivo. Se avessimo incluso il Regno Unito nello stesso grafico degli altri paesi, le barre di mercati importanti come EIRE, Germania e Francia sarebbero risultate microscopicamente insignificanti, impedendo l'estrazione di questi fondamentali insight strategici.
 
 ---
-### 📈 2. Trend Mensile delle Vendite
+### 📈 Task 2. Trend Mensile delle Vendite
 
 L'analisi temporale è stata eseguita aggregando il fatturato su base mensile per osservare l'evoluzione delle vendite nel tempo. Per evidenziare il trend generale e attenuare le oscillazioni di breve periodo è stata calcolata una media mobile a 3 mesi.
 
@@ -62,7 +62,7 @@ L'analisi temporale è stata eseguita aggregando il fatturato su base mensile pe
 - Il fatturato mostra una chiara componente stagionale durante il periodo analizzato.
 - I valori massimi vengono raggiunti nei mesi di **novembre 2010** e **novembre 2011**, suggerendo un significativo incremento della domanda nel periodo che precede le festività natalizie.
 - Dopo ciascun picco si osserva una marcata contrazione delle vendite, indicando un comportamento ciclico tipico delle attività retail.
-- Al di fuori dei picchi stagionali, il fatturato rimane relativamente stabile, oscillando tra circa **300.000 €** e **400.000 €** mensili.
+- Al di fuori dei picchi stagionali, il fatturato rimane relativamente stabile, oscillando tra circa **300.000 £** e **400.000 £** mensili.
 - La media mobile a 3 mesi evidenzia una crescita progressiva del fatturato nel secondo semestre di ciascun anno, culminando nei picchi registrati a novembre.
 
 > **Nota:** Il valore registrato a dicembre 2011 risulta sensibilmente inferiore rispetto agli altri mesi poiché il dataset termina il **9 dicembre 2011**, rappresentando quindi un mese incompleto e non direttamente confrontabile con gli altri periodi.
@@ -77,7 +77,7 @@ L'azienda presenta una forte stagionalità delle vendite, con una crescita signi
 
 ---
 
-### 🛍️ 3. Top 10 Prodotti per Volume e Fatturato
+### 🛍️ Task 3. Top 10 Prodotti per Volume e Fatturato
 
 Per identificare gli articoli più rilevanti del catalogo sono state effettuate due analisi complementari:
 
@@ -101,6 +101,28 @@ Le classifiche sono state ottenute raggruppando il dataset per `Description`.
 - Per il fatturato è stata calcolata la somma della colonna `TotalPrice`.
 
 Successivamente sono stati selezionati i primi 10 prodotti ordinati in ordine decrescente e rappresentati mediante grafici a barre orizzontali.
+
+
+### ⏰ Task 4. Analisi Oraria delle Vendite
+
+Per comprendere come il fatturato si distribuisce nell'arco della giornata e individuare le fasce orarie di maggiore attività commerciale, è stato analizzato il fatturato complessivo in funzione dell'ora di emissione degli ordini.
+
+#### 🔍 Considerazioni di Business
+
+- **Fascia di maggiore attività:** Il fatturato si concentra prevalentemente tra le **10:00 e le 15:00**, intervallo in cui si registra la maggior parte delle vendite.
+- **Picco giornaliero:** L'ora più redditizia è quella delle **12:00**, con un fatturato superiore a **1,5 milioni di £**, suggerendo che la tarda mattinata rappresenti il momento di massima attività dell'e-commerce.
+- **Riduzione nel pomeriggio:** Dopo le **15:00** il fatturato diminuisce progressivamente, con un calo particolarmente evidente dopo le **17:00**, quando il numero di acquisti si riduce sensibilmente.
+
+#### 🛠️ Nota Tecnica:
+
+L'analisi è stata realizzata estraendo la componente oraria dalla colonna `InvoiceDate` mediante l'attributo `.dt.hour`, creando la nuova variabile `Hour`.
+
+Successivamente il fatturato (`TotalPrice`) è stato aggregato per ciascuna ora della giornata tramite `groupby('Hour')` e rappresentato con un grafico a linee (`sns.lineplot`), una scelta che consente di evidenziare in modo efficace l'evoluzione temporale del fatturato durante la giornata.
+
+#### 📌 Insight Principale
+
+Le vendite risultano fortemente concentrate nelle ore centrali della giornata. Questa informazione può supportare decisioni relative alla pianificazione delle campagne marketing, alla gestione delle risorse operative e al dimensionamento dei servizi nei momenti di maggiore traffico.
+
 ## 📁 Struttura del Progetto
 
 ```text
