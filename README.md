@@ -123,6 +123,28 @@ Successivamente il fatturato (`TotalPrice`) è stato aggregato per ciascuna ora 
 
 Le vendite risultano fortemente concentrate nelle ore centrali della giornata. Questa informazione può supportare decisioni relative alla pianificazione delle campagne marketing, alla gestione delle risorse operative e al dimensionamento dei servizi nei momenti di maggiore traffico.
 
+
+### 📊 5. Analisi per Giorno della Settimana
+
+Per identificare le dinamiche di acquisto settimanali e comprendere la distribuzione del volume d'affari, è stato analizzato il fatturato complessivo in funzione del giorno di emissione degli ordini.
+
+#### 🔍 Considerazioni di Business
+
+- **Concentrazione nei giorni feriali:** il fatturato si concentra prevalentemente nei giorni lavorativi, con il valore massimo registrato il **giovedì** (2.094.319 £).
+- **Vendite minime nel fine settimana:** il minimo assoluto si registra il **sabato** (7.687 £), giorno in cui le vendite risultano quasi del tutto assenti.
+- **Ripresa della domenica:** la **domenica** mostra un fatturato significativo (1.195.496 £), nettamente superiore al sabato e paragonabile ad alcuni giorni lavorativi.
+
+#### 🛠️ Nota Tecnica
+
+L'analisi è stata realizzata estraendo l'indice numerico del giorno della settimana dalla colonna `InvoiceDate` tramite l'attributo `.dt.dayofweek`.
+
+Successivamente il fatturato (`TotalPrice`) è stato aggregato mediante `groupby()` e i valori numerici (0-6) sono stati convertiti nelle corrispondenti etichette in italiano tramite un dizionario di mapping. I risultati sono stati rappresentati con un grafico a barre (`sns.barplot`), mantenendo l'ordine cronologico dei giorni della settimana.
+
+#### 📌 Insight Principale
+
+Il comportamento osservato suggerisce una prevalente operatività **Business-to-Business (B2B)**, nella quale gli ordini tendono a concentrarsi durante la settimana lavorativa, mentre il sabato presenta un'attività commerciale pressoché nulla.
+
+La distribuzione osservata e la ripresa delle vendite nella giornata di domenica potrebbero essere legate alle caratteristiche operative del business, come l'elaborazione degli ordini nel fine settimana o specifiche modalità di registrazione delle transazioni. Tali ipotesi richiederebbero ulteriori approfondimenti per essere confermate.
 ## 📁 Struttura del Progetto
 
 ```text
