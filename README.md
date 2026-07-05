@@ -76,6 +76,31 @@ La colonna `InvoiceDate` è stata convertita nel formato `datetime` per consenti
 L'azienda presenta una forte stagionalità delle vendite, con una crescita significativa del fatturato nel periodo che precede le festività natalizie. Questo comportamento suggerisce che campagne promozionali, gestione delle scorte e pianificazione delle risorse dovrebbero essere concentrate soprattutto nell'ultimo trimestre dell'anno, periodo in cui si registra il maggiore volume di ricavi.
 
 ---
+
+### 🛍️ 3. Top 10 Prodotti per Volume e Fatturato
+
+Per identificare gli articoli più rilevanti del catalogo sono state effettuate due analisi complementari:
+
+- Top 10 prodotti per quantità venduta.
+- Top 10 prodotti per fatturato generato.
+
+Entrambe le classifiche sono rappresentate mediante grafici a barre orizzontali, facilitando il confronto tra volume di vendita e valore economico.
+
+#### 🔍 Considerazioni di Business
+
+- Il prodotto **WHITE HANGING HEART T-LIGHT HOLDER** occupa la prima posizione sia per quantità venduta sia per fatturato.
+- I prodotti più richiesti appartengono prevalentemente alla categoria degli articoli decorativi e da regalo, coerentemente con il settore retail del dataset.
+- Il confronto tra le due classifiche evidenzia che i prodotti con il maggior volume di vendita non coincidono sempre con quelli che generano il fatturato più elevato.
+- Questa analisi consente di individuare gli articoli più importanti sia in termini di domanda sia di valore economico, fornendo indicazioni utili per la gestione dell'assortimento e delle strategie commerciali.
+
+#### 🛠️ Nota Tecnica: 
+
+Le classifiche sono state ottenute raggruppando il dataset per `Description`.
+
+- Per il volume di vendita è stata calcolata la somma della colonna `Quantity`.
+- Per il fatturato è stata calcolata la somma della colonna `TotalPrice`.
+
+Successivamente sono stati selezionati i primi 10 prodotti ordinati in ordine decrescente e rappresentati mediante grafici a barre orizzontali.
 ## 📁 Struttura del Progetto
 
 ```text
