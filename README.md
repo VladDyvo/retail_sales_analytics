@@ -147,6 +147,35 @@ Successivamente il fatturato (`TotalPrice`) è stato aggregato mediante `groupby
 Il comportamento osservato suggerisce una prevalente operatività **Business-to-Business (B2B)**, nella quale gli ordini tendono a concentrarsi durante la settimana lavorativa, mentre il sabato presenta un'attività commerciale pressoché nulla.
 
 La distribuzione osservata e la ripresa delle vendite nella giornata di domenica potrebbero essere legate alle caratteristiche operative del business, come l'elaborazione degli ordini nel fine settimana o specifiche modalità di registrazione delle transazioni. Tali ipotesi richiederebbero ulteriori approfondimenti per essere confermate.
+
+---
+## 📊 Fase 3. Calcolo dei KPI di Business e Distribuzione degli Scontrini
+
+Per ottenere una panoramica delle performance commerciali dell'e-commerce, sono stati calcolati i principali indicatori di business (KPI) e analizzata la distribuzione del valore degli ordini sul dataset pulito.
+
+### 📈 KPI calcolati
+
+- **Fatturato Totale Complessivo:** **10.405.563,73 £**
+- **Numero Unico di Scontrini (Invoice):** **36.374**
+- **Numero Unico di Clienti:** **5.682**
+- **Scontrino Medio (AOV - Average Order Value):** **286,07 £**
+
+La distribuzione del valore degli ordini è stata rappresentata tramite un istogramma con curva di densità (KDE), evidenziando la posizione dello scontrino medio rispetto all'intera distribuzione delle transazioni.
+
+### 🔍 Considerazioni di Business
+
+- **Distribuzione asimmetrica degli ordini:** La maggior parte degli scontrini presenta un valore relativamente contenuto, concentrandosi principalmente tra **50 £ e 200 £**, mentre il numero di ordini diminuisce progressivamente all'aumentare dell'importo.
+- **Presenza di ordini ad alto valore:** La lunga coda della distribuzione evidenzia l'esistenza di un numero limitato di ordini di importo molto elevato, compatibili con clienti ad alto spendimento o acquisti all'ingrosso (B2B). Questi ordini influenzano significativamente il valore medio dello scontrino.
+- **Frequenza media di acquisto:** Il rapporto tra **36.374 ordini** e **5.682 clienti unici** corrisponde a una media di circa **6,4 ordini per cliente**. Questo rappresenta un primo indicatore di una buona frequenza di acquisto, che verrà approfondito nelle successive analisi **RFM** e **Cohort Analysis**.
+
+### 🛠️ Nota Tecnica
+
+Le metriche sono state calcolate nel notebook `03_kpi_calculations.ipynb`.
+
+- Il valore di ciascun ordine è stato ottenuto aggregando il fatturato (`TotalPrice`) per numero di fattura (`Invoice`) tramite `groupby()`.
+- La distribuzione degli scontrini è stata visualizzata mediante un istogramma con curva di densità (KDE) utilizzando Seaborn.
+- Per migliorare la leggibilità del grafico ed evitare che pochi ordini di importo molto elevato comprimessero la distribuzione, la visualizzazione è stata limitata agli scontrini inferiori a **1.000 £**. Tutti i KPI sono stati comunque calcolati sull'intero dataset.
+- Il grafico finale è stato salvato nel percorso `output/grafici/distribuzione_scontrini.png`.
 ## 📁 Struttura del Progetto
 
 ```text
