@@ -175,7 +175,41 @@ Le metriche sono state calcolate nel notebook `03_kpi_calculations.ipynb`.
 - Il valore di ciascun ordine è stato ottenuto aggregando il fatturato (`TotalPrice`) per numero di fattura (`Invoice`) tramite `groupby()`.
 - La distribuzione degli scontrini è stata visualizzata mediante un istogramma con curva di densità (KDE) utilizzando Seaborn.
 - Per migliorare la leggibilità del grafico ed evitare che pochi ordini di importo molto elevato comprimessero la distribuzione, la visualizzazione è stata limitata agli scontrini inferiori a **1.000 £**. Tutti i KPI sono stati comunque calcolati sull'intero dataset.
-- Il grafico finale è stato salvato nel percorso `output/grafici/distribuzione_scontrini.png`.
+- Il grafico finale è stato salvato nel percorso `output/grafici/distribuzione_scontrini.png`.    
+
+---
+
+## 📊 Fase 4 — Segmentazione RFM & Analisi delle Coorti
+
+In questa fase il focus si è spostato dall'andamento macroeconomico del business (Fase 3) al comportamento microscopico del parco clienti, implementando due delle tecniche analitiche più potenti per il marketing e la fidelizzazione: la segmentazione RFM e l'analisi della Retention tramite Coorti.
+
+### 🎯 Task 1: Segmentazione RFM (Recency, Frequency, Monetary)
+Per comprendere il valore e lo stato di salute di ogni singolo cliente, è stato calcolato lo score RFM basato su tre metriche:
+* **Recency (R):** Giorni trascorsi dall'ultimo acquisto rispetto a una data di riferimento globale (`max(InvoiceDate) + 1 giorno`).
+* **Frequency (F):** Numero totale di transazioni uniche effettuate dal cliente.
+* **Monetary (M):** Totale della spesa monetaria generata dal cliente.
+
+#### 🛠️ Scelte Metodologiche & Ottimizzazioni:
+* **Gestione Clienti Anonimi:** Come definito nella strategia, i calcoli RFM sono stati applicati esclusivamente sui clienti registrati con un ID valido (`Customer ID` non nullo), isolando 5.682 utenti unici senza alterare l'integrità del dataset principale.
+* **Risoluzione Duplicati nei Quintili:** Per la metrica *Frequency*, la presenza di forti addensamenti di valori identici avrebbe causato errori nel calcolo dei quintili tramite `pd.qcut()`. Il problema è stato risolto applicando il metodo `.rank(method='first')`, garantendo una distribuzione omogenea e priva di sovrapposizioni.
+* **Mappatura Avanzata:** I clienti sono stati segmentati in 10 categorie di business (es. *Champions*, *Loyal Customers*, *Can't Lose Them*, *Hibernating*) sfruttando la flessibilità delle espressioni regolari (`regex=True`) applicate sulle combinazioni strutturate di punteggi. La distribuzione finale ha registrato **0 clienti non mappati (NaN)**, a conferma della solidità del dizionario logico.
+
+L'output finale è stato salvato in modo strutturato nel percorso tracciato dal repository: `output/dati_puliti/rfm_output.csv`.
+
+---
+
+### 🔄 Task 2: Analisi delle Coorti & Retention Rate
+Per misurare la capacità del brand di trattenere i clienti nel tempo, è stata sviluppata un'analisi delle coorti basata sul mese del primo acquisto (*Mese di Coorte*).
+
+#### 🛠️ Implementazione Tecnica:
+1. **Identificazione della Coorte:** È stato isolato il mese della prima transazione assoluta di ciascun utente tramite un raggruppamento ottimizzato: `df_rfm.groupby('Customer ID')['InvoiceDate'].transform('min')`.
+2. **Calcolo del CohortIndex:** È stata calcolata la distanza temporale in mesi interi tra il mese di ogni acquisto successivo e il mese di origine della coorte (`TransactionMonth - CohortMonth`), normalizzando i periodi con `.apply(lambda x: x.n)`.
+3. **Generazione Matrice di Retention:** I dati sono stati aggregati in una tabella pivot di clienti unici e successivamente convertiti in percentuali dividendo ogni valore per la dimensione iniziale della rispettiva coorte (Mese 0).
+
+#### 📈 Key Insights dal Grafico (`output/grafici/cohort_retention_heatmap.png`):
+* **Churn immediato:** Tutte le coorti mostrano un calo drastico al mese 1 — in media solo il **20-35%** dei clienti effettua un secondo acquisto il mese successivo al primo. Questo indica un'opportunità critica di miglioramento nella strategia di onboarding e retention immediata.
+* **Fidelizzazione della Coorte Storica:** La coorte iniziale di `2009-12` si dimostra la più solida del dataset, mantenendo un Retention Rate compreso stabilmente tra il **20% e il 49%** nei mesi successivi, mostrando una forte resistenza al logorio temporale.
+* **Effetto Stagionalità (Natale):** Il grafico mostra una marcata diagonale di incremento dei riacquisti in corrispondenza di **Dicembre 2010**. I clienti storici accumulati nei mesi precedenti tendono a riattivarsi simultaneamente (ad esempio, la coorte `2010-01` risale al **40%** al mese 11 dopo essere scesa fino al 17% nei periodi precedenti), guidati dalla stagionalità degli acquisti festivi.
 ## 📁 Struttura del Progetto
 
 ```text
