@@ -1,6 +1,6 @@
 # Retail Sales Analytics - Online Retail II
 
-Questo progetto si occupa dell'analisi avanzata dei dati di vendita di un e-commerce globale, coprendo l'intero biennio dal 2009 al 2011. L'obiettivo è trasformare oltre 1 milione di transazioni grezze in informazioni strategiche per il business attraverso tecniche di Data Cleaning, Exploratory Data Analysis (EDA), calcolo dei KPI commerciali, Analisi delle Coorti e segmentazione dei clienti tramite modello RFM.
+Questo progetto si occupa dell'analisi avanzata dei dati di vendita di un e-commerce globale, comprendendo il periodo compreso tra dicembre 2009 e dicembre 2011. L'obiettivo è trasformare oltre 1 milione di righe transazionali grezze in informazioni strategiche per il business attraverso tecniche di Data Cleaning, Exploratory Data Analysis (EDA), calcolo dei KPI commerciali, Analisi delle Coorti e segmentazione dei clienti tramite modello RFM.
 
 ---
 
