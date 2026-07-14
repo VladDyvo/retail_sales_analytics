@@ -3,6 +3,135 @@
 Questo progetto si occupa dell'analisi avanzata dei dati di vendita di un e-commerce globale, coprendo l'intero biennio dal 2009 al 2011. L'obiettivo è trasformare oltre 1 milione di transazioni grezze in informazioni strategiche per il business attraverso tecniche di Data Cleaning, Exploratory Data Analysis (EDA), calcolo dei KPI commerciali, Analisi delle Coorti e segmentazione dei clienti tramite modello RFM.
 
 ---
+
+## 📌 Executive Summary
+
+Il progetto **Retail Sales Analytics** analizza le transazioni e-commerce contenute nel dataset **Online Retail II**, relativo al periodo compreso tra dicembre 2009 e dicembre 2011.
+
+Il processo analitico parte da oltre un milione di righe grezze e comprende attività di **Data Cleaning**, **Exploratory Data Analysis**, calcolo dei **KPI di business**, segmentazione dei clienti tramite modello **RFM** e misurazione della retention attraverso la **Cohort Analysis**.
+
+Dopo la rimozione dei duplicati, la separazione dei resi, la gestione dei clienti anonimi e il trattamento degli outlier, il dataset finale contiene **876.436 righe transazionali pulite**.
+
+### 📈 KPI principali
+
+| KPI | Valore | Descrizione |
+| :--- | ---: | :--- |
+| 💰 **Fatturato del dataset pulito** | **10.405.563,73 £** | Valore complessivo delle vendite incluse nel perimetro analitico |
+| 🧾 **Ordini unici** | **36.374** | Numero di fatture di vendita distinte |
+| 👥 **Clienti unici identificati** | **5.682** | Clienti associati a un `Customer ID` valido |
+| 🛒 **Average Order Value – AOV** | **286,07 £** | Valore medio generato da ogni ordine |
+
+### 🔍 Principali risultati
+
+- Circa l’**88,03% del fatturato analizzato** proviene dal Regno Unito, evidenziando una forte concentrazione sul mercato domestico e un possibile rischio legato alla limitata diversificazione geografica.
+
+- Le vendite presentano una marcata stagionalità, con i principali picchi di fatturato registrati nei mesi di **novembre 2010** e **novembre 2011**.
+
+- Il fatturato si concentra prevalentemente tra le **10:00 e le 15:00**, con il massimo valore registrato intorno alle **12:00**.
+
+- Il **giovedì** è il giorno con il fatturato più elevato, mentre il sabato presenta un’attività commerciale quasi assente.
+
+- La segmentazione RFM identifica **1.453 clienti `Hibernating`**, pari a circa il **25,6%** della customer base identificata. Si tratta del segmento più numeroso dell’intera segmentazione.
+
+- I segmenti `Champions` e `Loyal Customers` comprendono complessivamente **1.928 clienti**, pari a circa il **34%** della base identificata.
+
+- Nel primo mese successivo all’acquisizione, la retention di numerose coorti si colloca indicativamente tra il **20% e il 35%**.
+
+- Il passaggio dal primo al secondo acquisto rappresenta quindi uno dei principali punti critici del customer journey.
+
+---
+
+## 🖼️ Visualizzazioni chiave
+
+### Trend mensile delle vendite
+
+Il grafico mostra l’andamento mensile del fatturato e la relativa media mobile a tre mesi.
+
+L’analisi evidenzia una crescita progressiva durante il secondo semestre di ciascun anno, culminando nei picchi registrati nel periodo precedente alle festività natalizie.
+
+> **Nota:** il valore di dicembre 2011 deve essere interpretato con cautela, poiché il dataset termina il 9 dicembre 2011 e il mese risulta quindi incompleto.
+
+![Trend mensile delle vendite](output/grafici/trend_mensile.png)
+
+### Cohort Retention Heatmap
+
+La heatmap misura la percentuale di clienti che torna ad acquistare nei mesi successivi al primo ordine.
+
+La colonna con `CohortIndex = 0` rappresenta il mese di acquisizione ed è pari al 100% per definizione. Le colonne successive mostrano la percentuale di clienti ancora attivi nei mesi seguenti.
+
+L’analisi evidenzia una forte riduzione della customer base già nel primo mese successivo all’acquisizione. In numerose coorti, soltanto il **20–35%** dei clienti torna ad acquistare nel mese successivo al primo ordine.
+
+![Cohort Retention Heatmap](output/grafici/cohort_retention_heatmap.png)
+
+---
+
+## 💡 Raccomandazioni strategiche
+
+### 1. Incentivare il secondo acquisto
+
+La riduzione più significativa della retention avviene immediatamente dopo il mese di acquisizione.
+
+È consigliabile introdurre un flusso automatico di onboarding post-acquisto che includa:
+
+- email di ringraziamento;
+- richiesta di feedback sull’esperienza di acquisto;
+- raccomandazioni basate sul primo ordine;
+- incentivo utilizzabile sul secondo acquisto entro 15–30 giorni;
+- reminder automatici prima della scadenza dell’offerta.
+
+L’obiettivo è aumentare la percentuale di clienti che supera il primo acquisto e ridurre il churn nelle prime fasi del customer journey.
+
+### 2. Riattivare i clienti `At Risk`, `Can’t Lose Them` e `Hibernating`
+
+La segmentazione RFM individua:
+
+- **741 clienti `At Risk`**, che in passato hanno acquistato con una buona frequenza ma non risultano più recenti;
+- **75 clienti `Can’t Lose Them`**, storicamente molto frequenti ma inattivi da un periodo prolungato;
+- **1.453 clienti `Hibernating`**, pari al 25,6% della customer base identificata e segmento più numeroso dell’intera segmentazione.
+
+I clienti `At Risk` e `Can’t Lose Them` dovrebbero ricevere campagne di recupero ad alta priorità, perché hanno già dimostrato un rapporto significativo con il business.
+
+Il segmento `Hibernating`, data la sua ampiezza, dovrebbe invece essere gestito in modo selettivo. La variabile `Monetary` può essere utilizzata per concentrare gli investimenti sui clienti dormienti che in passato hanno generato maggiore valore.
+
+È consigliabile sviluppare campagne basate su:
+
+- storico degli acquisti;
+- valore monetario generato;
+- prodotti precedentemente acquistati;
+- offerte con durata limitata;
+- comunicazioni differenziate per segmento;
+- misurazione del tasso di riattivazione;
+- misurazione del fatturato incrementale prodotto dalle campagne.
+
+### 3. Pianificare anticipatamente le attività del quarto trimestre
+
+I picchi registrati nel mese di novembre mostrano che il periodo precedente al Natale è determinante per il fatturato.
+
+L’azienda dovrebbe quindi:
+
+- pianificare le campagne stagionali già da settembre o ottobre;
+- aumentare preventivamente le scorte dei prodotti più richiesti;
+- concentrare una parte maggiore del budget marketing nel quarto trimestre;
+- riattivare i clienti che hanno già acquistato nei precedenti periodi natalizi;
+- rafforzare le risorse operative e logistiche nelle ore centrali della giornata;
+- monitorare con anticipo l’andamento delle vendite rispetto agli anni precedenti.
+
+---
+
+## 🎯 Conclusione dell’analisi
+
+I risultati mostrano che la crescita del business non dipende soltanto dall’acquisizione di nuovi clienti, ma anche dalla capacità di trasformare il primo ordine in una relazione continuativa.
+
+La combinazione tra KPI, segmentazione RFM e Cohort Analysis permette di individuare tre priorità principali:
+
+1. **Proteggere e valorizzare i clienti migliori.**
+2. **Recuperare i clienti a rischio di abbandono e gestire selettivamente i clienti dormienti.**
+3. **Migliorare la retention subito dopo il primo acquisto.**
+
+Queste analisi trasformano il dataset transazionale in uno strumento concreto di supporto alle decisioni commerciali, alle campagne CRM e alla pianificazione delle strategie di fidelizzazione.
+
+---
+---
 ## 📝 Stato Avanzamento Lavori
 
 ### 🧼 Fase 1: Ispezione Iniziale e Data Cleaning (Completato ✅)
